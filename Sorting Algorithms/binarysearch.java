@@ -27,8 +27,13 @@ public class binarysearch {
 			if(args[avg] > num) max = avg + 1;
 			System.out.println(avg);	
 		}
-		if(args[avg] != num) {
+		if(args[avg] < num) {
 			for(int x = avg; x < args.length; x++) {
+				if(args[x] == num) avg = x;
+			}
+		}
+		if(args[avg] > num) {
+			for(int x = avg; x >= 0; x--) {
 				if(args[x] == num) avg = x;
 			}
 		}
