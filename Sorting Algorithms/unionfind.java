@@ -37,19 +37,41 @@ class quickfind extends uf {
 
 class quickunion extends uf {
 	private int[] id;
+	private int[] size;
 	public quickunion(int N) {
 		id = new int[N];
-		for(int i = 0; i < N; i++) id[i] = i;
+		size = new int[N];
+		for(int i = 0; i < N; i++) {
+		       	id[i] = i;
+			size[i] = 1;
+		}
 	}
 	private int root(int i) {
-		while(i != id[i]) i = id[i];
+		while(i != id[i]) {
+			/*Path compression 
+			 * id[i] = id[id[i]];
+			 * */
+			i = id[i];
 		return i;
 	}
 	public boolean connected(int p, int q) {
 		return root(q) == root(p);
 	}
-	public void union(int child, int parent) {
-		id[root(child)] = root(parent);
+	public void union(int p, int q) {
+		int a = root(p);
+		int b = root(q);
+		/*weighted quick-union: attaches the smaller tree to the bigger
+		 * tree. The max number of nodes to the botton node is given
+		 * by log base 2 N, where N is the total # of nodes */
+		if(a == b) return;
+		if(size[a] < size[b]) {
+			id[a] = b;
+			size[b] += size[a];
+		}
+		else {
+			id[b] = a;
+			size[a] += size[b];
+		}
 	}
 }
 
