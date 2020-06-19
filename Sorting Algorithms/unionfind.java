@@ -17,7 +17,7 @@ abstract class UF {
 
 class QuickFind extends UF {
 	private int[] id;
-	public quickfind(int N) {
+	public QuickFind(int N) {
 		id = new int[N];
 		for(int x = 0; x < N; x++) {
 			id[x] = x;
@@ -38,7 +38,7 @@ class QuickFind extends UF {
 class QuickUnion extends UF {
 	private int[] id;
 	private int[] size;
-	public quickunion(int N) {
+	public QuickUnion(int N) {
 		id = new int[N];
 		size = new int[N];
 		for(int i = 0; i < N; i++) {
