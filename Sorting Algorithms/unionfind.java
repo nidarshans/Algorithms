@@ -10,12 +10,12 @@ public class unionfind {
 	}
 }
 
-abstract class uf {
+abstract class UF {
 	public abstract void union(int p, int q);
 	public abstract boolean connected(int p , int q);
 }
 
-class quickfind extends uf {
+class QuickFind extends UF {
 	private int[] id;
 	public quickfind(int N) {
 		id = new int[N];
@@ -35,7 +35,7 @@ class quickfind extends uf {
 	}
 }
 
-class quickunion extends uf {
+class QuickUnion extends UF {
 	private int[] id;
 	private int[] size;
 	public quickunion(int N) {
@@ -48,9 +48,8 @@ class quickunion extends uf {
 	}
 	private int root(int i) {
 		while(i != id[i]) {
-			/*Path compression 
-			 * id[i] = id[id[i]];
-			 * */
+			/* Path compression: 
+			 * id[i] = id[id[i]]; */
 			i = id[i];
 		return i;
 	}
@@ -60,7 +59,7 @@ class quickunion extends uf {
 	public void union(int p, int q) {
 		int a = root(p);
 		int b = root(q);
-		/*weighted quick-union: attaches the smaller tree to the bigger
+		/* weighted quick-union: attaches the smaller tree to the bigger
 		 * tree. The max number of nodes to the botton node is given
 		 * by log base 2 N, where N is the total # of nodes */
 		if(a == b) return;
