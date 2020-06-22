@@ -16,11 +16,10 @@ public class binarysearch {
 	public static int binarySearch(int[] args, int num) {
 		int min = 0, max = args.length - 1;
 		int avg = 0;
-		System.out.println("l: " + Math.ceil(
-		Math.log((double)args.length - 1) / Math.log(2.0)
-		));
-		for(int i = 0; i < Math.ceil(Math.log((double)args.length - 1) 
-		/ Math.log(2.0)); i++) {
+		int L = Math.ceil(Math.log((double)args.length - 1)
+                / Math.log(2.0));
+		System.out.println("l: " + L);
+		for(int i = 0; i < L; i++) {
 			avg = (min + max) / 2;
 			if(args[avg] == num) return avg;
 		       	if(args[avg] < num) min = avg - 1;
@@ -37,7 +36,8 @@ public class binarysearch {
 				if(args[x] == num) avg = x;
 			}
 		}
-		return avg;
+		if(avg == num) return avg;
+		return -1;
 	}
 
 }
