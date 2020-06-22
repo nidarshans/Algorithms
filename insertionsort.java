@@ -17,7 +17,6 @@ public class insertionsort {
 
 	public static void insertionSort(int[] arg) {
 		int key = 0;
-		int[] temp = new int[arg.length];
 		for(int i = 1; i < arg.length; i++) {
 			int index = i - 1;
 			key = arg[i];
