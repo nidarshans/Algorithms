@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class stack {
+public class stackqueue {
 	public static void main(String[] args) {
 		Stack<String> s = new Stack<String>();
 		s.push("Hello");
@@ -20,7 +20,7 @@ class Stack<T> {
 	public Stack() {}
 	public void resize(int L) {
 		T[] copy = (T[]) new Object[L];
-		for(int x = 0; x < L && x < v.length; x++) {
+		for(int x = 0; x < N; x++) {
 			copy[x] = v[x];
 		}
 		v = copy;
@@ -36,3 +36,25 @@ class Stack<T> {
 		return item;
 	}
 }
+
+class Queue<T> {
+	private T[] q = (T[]) new Object[10];
+	private int head = 0;
+	private int tail = 0;
+	public Queue() {}
+	public void resize(int L) {
+                T[] copy = (T[]) new Object[L];
+		for(int x = head; x < tail; x++) copy[x - head] = q[x];
+		q = copy;
+        }
+	public void enqueue(T w) {
+		if(tail == q.length) resize(q.length * 2);
+		q[tail++] = w;
+	}
+	public T dequeue() {
+		T item = q[head++];
+		if(tail - head <= q.length / 4) resize(q.length / 2);
+		return item;
+	}
+}
+
