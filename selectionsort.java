@@ -8,7 +8,7 @@ public class selectionsort {
 	public static void main(String[] args) {
 		
 	}
-	public void sort(int[] l) {
+	public void selectionSort(int[] l) {
 		int min;
 		int swp;
 		int temp;

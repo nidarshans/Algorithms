@@ -17,7 +17,7 @@ public class bubblesort {
 		for(int x : array) System.out.println(x);
 	}
 
-	public static boolean bubble(int[] arg) {
+	public static boolean bubbleSort(int[] arg) {
 		boolean swapped = false;
 		for(int x = 0; x < arg.length - 1; x++) {
 			if(arg[x] > arg[x+1]) {
