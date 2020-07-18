@@ -5,25 +5,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class binarytree {
-	public static void main(String[] args) {
-		BinaryTree b = new BinaryTree(10);
-		b.insert(20);
-		b.insert(5);
-		b.insert(22);
-		b.insert(5);
-		b.insert(1);
-		b.traverse(b.root);
-	}
+	public static void main(String[] args) {}
 }
 
 class BinaryTree {
 	public Node root;
-	private int N = 1;
+	private int N = 0;
 	public BinaryTree(int r) {
 		root = new Node(r);
+		N++;
 	}
+	public BinaryTree(){}
 	public void insert(int val) {
 		root = insert(root, val);
+		N++;
 	}
 	private Node insert(Node x, int val) {
 		if(x == null) return new Node(val);
