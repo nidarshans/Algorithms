@@ -25,18 +25,31 @@ class Graph {
 		Stack<Integer> S = new Stack<Integer>();
 		S.push(Integer.valueOf(v));
 		while(!S.isEmpty()) {
-			int v = S.pop().intValue();
-			for(Integer u : A[v]) {
+			int a = S.pop().intValue();
+			Integer[] i = A[a].getArray();
+			for(Integer u : i) {
 				if(marked[u.intValue()] == false) {
 					S.push(u);
 					marked[u.intValue()] = true;
-					edgeTo[u.intValue()] = v;
+					edgeTo[u.intValue()] = a;
 				}
 			}
 		}
 	}
 	public void bfs(Graph G, int v) {
-		//Same implementation as DFS but with Queue
+		Queue<Integer> Q = new Queue<Integer>();
+		Q.enqueue(Integer.valueOf(v));
+		while(!Q.isEmpty()) {
+			int a = Q.dequeue().intValue();
+			Integer[] i = A[a].getArray();
+			for(Integer u : i) {
+				if(marked[u.intValue()] == false) {
+					Q.enqueue(u);
+					marked[u.intValue()] = true;
+					edgeTo[u.intValue()] = a;
+				}
+			}
+		}
 	}
 }
 
