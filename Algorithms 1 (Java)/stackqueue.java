@@ -35,7 +35,12 @@ class Stack<T> {
 		if(N > 0 && N <= v.length / 4) resize(v.length / 2);
 		return item;
 	}
-	public boolean isEmpty() { return N == 0; }
+	public boolean isEmpty() { 
+		return N == 0; 
+	}
+	public T[] getArray() { 
+		return v;
+	}
 }
 
 class Queue<T> {
@@ -59,6 +64,11 @@ class Queue<T> {
 		if(tail - head <= q.length / 4) resize(q.length / 2);
 		return item;
 	}
-	public boolean isEmpty() { return (tail - head) == 0; }
+	public boolean isEmpty() { 
+		return (tail - head) == 0; 
+	}
+	public T[] getArray() {
+		return q;
+	}
 }
 
