@@ -18,7 +18,7 @@ class Stack<T> {
 	private T[] v = (T[]) new Object[10];
 	private int N = 0;
 	public Stack() {}
-	public void resize(int L) {
+	private void resize(int L) {
 		T[] copy = (T[]) new Object[L];
 		for(int x = 0; x < N; x++) {
 			copy[x] = v[x];
@@ -35,6 +35,7 @@ class Stack<T> {
 		if(N > 0 && N <= v.length / 4) resize(v.length / 2);
 		return item;
 	}
+	public boolean isEmpty() { return N == 0; }
 }
 
 class Queue<T> {
@@ -42,10 +43,12 @@ class Queue<T> {
 	private int head = 0;
 	private int tail = 0;
 	public Queue() {}
-	public void resize(int L) {
+	private void resize(int L) {
                 T[] copy = (T[]) new Object[L];
 		for(int x = head; x < tail; x++) copy[x - head] = q[x];
 		q = copy;
+		head = 0;
+		tail = tail - head;
         }
 	public void enqueue(T w) {
 		if(tail == q.length) resize(q.length * 2);
@@ -56,5 +59,6 @@ class Queue<T> {
 		if(tail - head <= q.length / 4) resize(q.length / 2);
 		return item;
 	}
+	public boolean isEmpty() { return (tail - head) == 0; }
 }
 
