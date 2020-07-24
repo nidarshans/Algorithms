@@ -1,25 +1,26 @@
 import java.lang.Math;
 
-public class Graph {
+public class graph {
 	public static void main(String[] args) {}
 }
 
-class UndirectedGraph {
+class Graph {
 	final int V;
 	public Stack<Integer>[] A;
-	public boolean[] marked = new boolean[V];
-	public int[] edgeTo = new int[V];
+	public boolean[] marked;
+	public int[] edgeTo;
+	public int[] distTo;
 
-	public UndirectedGraph(int V) {
+	public Graph(int V) {
 		this.V = V;
 		A = (Stack<Integer>[]) new Object[V];
+		marked = new boolean[V];
+		edgeTo = new int[V];
+		distTo = new int[V];
 		for(int x = 0; x < V; x++) marked[x] = false;
 	}
-	public void addEdge(int v, int w) {
-		A[v].push(Integer.valueOf(w));
-		A[w].push(Integer.valueOf(v));
-	}
-	public void dfs(UndirectedGraph G, int v) {
+	
+	public void dfs(Graph G, int v) {
 		Stack<Integer> S = new Stack<Integer>();
 		S.push(Integer.valueOf(v));
 		while(!S.isEmpty()) {
@@ -34,7 +35,9 @@ class UndirectedGraph {
 			}
 		}
 	}
-	public void bfs(UndirectedGraph G, int v) {
+	
+	public void bfs(Graph G, int v) {
+		int count = 0;
 		Queue<Integer> Q = new Queue<Integer>();
 		Q.enqueue(Integer.valueOf(v));
 		while(!Q.isEmpty()) {
@@ -51,4 +54,21 @@ class UndirectedGraph {
 	}
 }
 
+class UndirectedGraph extends Graph {
+	public UndirectedGraph(int V) {
+		super(V);
+	}
+	public void addEdge(int v, int w) {
+		A[v].push(Integer.valueOf(w));
+		A[w].push(Integer.valueOf(v));
+	}
+}
 
+class DirectedGraph extends Graph {
+	public DirectedGraph(int V) {
+		super(V);
+	}
+	public void addEdge(int v, int w) {
+		A[v].push(Integer.valueOf(w));
+	}
+}
