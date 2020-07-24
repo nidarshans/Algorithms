@@ -1,18 +1,16 @@
 import java.lang.Math;
 
-public class undirectedgraph {
-	public static void main(String[] args) {
-	
-	}
+public class Graph {
+	public static void main(String[] args) {}
 }
 
-class Graph {
+class UndirectedGraph {
 	final int V;
 	public Stack<Integer>[] A;
 	public boolean[] marked = new boolean[V];
 	public int[] edgeTo = new int[V];
 
-	public Graph(int V) {
+	public UndirectedGraph(int V) {
 		this.V = V;
 		A = (Stack<Integer>[]) new Object[V];
 		for(int x = 0; x < V; x++) marked[x] = false;
@@ -21,7 +19,7 @@ class Graph {
 		A[v].push(Integer.valueOf(w));
 		A[w].push(Integer.valueOf(v));
 	}
-	public void dfs(Graph G, int v) {
+	public void dfs(UndirectedGraph G, int v) {
 		Stack<Integer> S = new Stack<Integer>();
 		S.push(Integer.valueOf(v));
 		while(!S.isEmpty()) {
@@ -36,7 +34,7 @@ class Graph {
 			}
 		}
 	}
-	public void bfs(Graph G, int v) {
+	public void bfs(UndirectedGraph G, int v) {
 		Queue<Integer> Q = new Queue<Integer>();
 		Q.enqueue(Integer.valueOf(v));
 		while(!Q.isEmpty()) {
