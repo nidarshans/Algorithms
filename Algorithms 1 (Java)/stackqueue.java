@@ -6,16 +6,20 @@ import java.util.Scanner;
 
 public class stackqueue {
 	public static void main(String[] args) {
-		Stack<String> s = new Stack<String>();
-		s.push("Hello");
-		s.push("World");
-		System.out.println(s.pop().length());
+		Queue<String> q = new Queue<String>();
+		q.enqueue("1");
+		q.enqueue("2");
+		q.enqueue("3");
+		System.out.println(q.dequeue());
+		System.out.println(q.dequeue());
+		System.out.println(q.dequeue());
+		System.out.println(q.isEmpty());
 	}
 
 }
 
 class Stack<T> {
-	private T[] v = (T[]) new Object[10];
+	private T[] v = (T[]) new Object[3];
 	private int N = 0;
 	public Stack() {}
 	private void resize(int L) {
@@ -27,7 +31,7 @@ class Stack<T> {
 	}
 	public void push(T Q) {
 		if(N == v.length) resize(v.length * 2);
-		else v[N++] = Q;
+		v[N++] = Q;
 	}
 	public T pop() {
 		T item = v[--N];
@@ -38,13 +42,20 @@ class Stack<T> {
 	public boolean isEmpty() { 
 		return N == 0; 
 	}
-	public T[] getArray() { 
-		return v;
+	public T[] getArray() {
+		int L = 0;
+		for(int x = 0; x < v.length; x++) {
+			if(v[x] != null) L++;
+			else break;
+		}
+		T[] copy = (T[]) new Object[L];
+		for(int x = 0; x < L; x++) copy[x] = v[x];
+		return copy;
 	}
 }
 
 class Queue<T> {
-	private T[] q = (T[]) new Object[10];
+	private T[] q = (T[]) new Object[3];
 	private int head = 0;
 	private int tail = 0;
 	public Queue() {}
@@ -52,8 +63,8 @@ class Queue<T> {
                 T[] copy = (T[]) new Object[L];
 		for(int x = head; x < tail; x++) copy[x - head] = q[x];
 		q = copy;
-		head = 0;
 		tail = tail - head;
+		head = 0;
         }
 	public void enqueue(T w) {
 		if(tail == q.length) resize(q.length * 2);
@@ -65,10 +76,17 @@ class Queue<T> {
 		return item;
 	}
 	public boolean isEmpty() { 
-		return (tail - head) == 0; 
+		return q[head] == null; 
 	}
 	public T[] getArray() {
-		return q;
+		int L = 0;
+                for(int x = 0; x < q.length; x++) {
+                        if(q[x] != null) L++;
+                        else break;
+                }
+                T[] copy = (T[]) new Object[L];
+                for(int x = 0; x < L; x++) copy[x] = q[x];
+                return copy;
 	}
 }
 
