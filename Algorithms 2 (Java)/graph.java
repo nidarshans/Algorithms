@@ -112,3 +112,38 @@ class DirectedGraph extends Graph {
 		A[v].push(Integer.valueOf(w));
 	}
 }
+
+class EdgeWeightedGraph {
+	private final int V;
+	public Stack<Edge>[] G;
+
+	public EdgeWeightedGraph(int V) {
+		this.V = V;
+		G = (Stack<Edge>[]) new Stack[V];
+		for(int x = 0; x < V; x++) G[x] = new Stack<Edge>();
+	}
+	public void addEdge(int v, int w, int weight) {
+		Edge E = new Edge(v,w,weight);
+		G[v].push(E);
+		G[w].push(E);
+	}
+}
+
+class Edge {
+	private int a,b;
+	private double weight;
+
+	public Edge(int q, int w, double e) {
+		a = q;
+		b = w;
+		weight = e;
+	}
+	public int v1() { return a; }
+	public int v2() { return b; }
+	public double getWeight() { return weight; }
+	public int compare(Edge e) {
+		if(weight < e.getWeight()) return -1;
+		else if(weight > e.getWeight()) return 1;
+		else return 0;
+	}
+}
