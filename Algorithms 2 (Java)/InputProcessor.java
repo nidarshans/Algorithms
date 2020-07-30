@@ -4,13 +4,14 @@ import java.util.Scanner;
 import java.io.FileWriter;
 
 public class InputProcessor {
-	public static File contains(String key, String delim, File in) {
+	public static File contains(int start, String key, String delim, File in) {
 		try {
 			File out = new File("contains.out");
 			out.createNewFile();
 			FileWriter W = new FileWriter(out);
 			Scanner S = new Scanner(in);
-			String line;
+			String line = "";
+			for(int x = 0; x < start - 1; x++) S.nextLine();
 			while(S.hasNextLine()) {
 				line = S.nextLine();
 				line.trim();
@@ -27,8 +28,16 @@ public class InputProcessor {
 		catch(Exception e) { e.printStackTrace(); }
 		return in;
 	}
-	public static File sort(int col, String delim, File in) {
-		try {}
+	public static File sort(int col, int start, int L, String delim, File in) {
+		try {
+			File out = new File("sort.out");
+                        out.createNewFile();
+                        FileWriter W = new FileWriter(out);
+                        Scanner S = new Scanner(in);
+                        String line = "";
+			String[] toSort = new String[L];
+			for(int x = 0; x < start - 1; x++) line = S.nextLine();
+		}
 		catch(Exception e) { e.printStackTrace(); }
 		return in;
 	}
