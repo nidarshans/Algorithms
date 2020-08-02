@@ -16,27 +16,11 @@ public class InputProcessor {
 				line = S.nextLine();
 				line.trim();
 				for(String i : line.split(delim)) {
-					if(i.equals(key)) {
-						W.write(line + "\n");
-						System.out.println(line);
-					}
+					if(i.equals(key)) W.write(line + "\n");
 				}
 			}
 			W.close();
 			return out;
-		}
-		catch(Exception e) { e.printStackTrace(); }
-		return in;
-	}
-	public static File sort(int col, int start, int L, String delim, File in) {
-		try {
-			File out = new File("sort.out");
-                        out.createNewFile();
-                        FileWriter W = new FileWriter(out);
-                        Scanner S = new Scanner(in);
-                        String line = "";
-			String[] toSort = new String[L];
-			for(int x = 0; x < start - 1; x++) line = S.nextLine();
 		}
 		catch(Exception e) { e.printStackTrace(); }
 		return in;
