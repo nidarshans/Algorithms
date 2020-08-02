@@ -5,17 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class stackqueue {
-	public static void main(String[] args) {
-		Queue<String> q = new Queue<String>();
-		q.enqueue("1");
-		q.enqueue("2");
-		q.enqueue("3");
-		System.out.println(q.dequeue());
-		System.out.println(q.dequeue());
-		System.out.println(q.dequeue());
-		System.out.println(q.isEmpty());
-	}
-
+	public static void main(String[] args) {}
 }
 
 class Stack<T> {
@@ -39,17 +29,14 @@ class Stack<T> {
 		if(N > 0 && N <= v.length / 4) resize(v.length / 2);
 		return item;
 	}
-	public boolean isEmpty() { 
-		return N == 0; 
+	public boolean isEmpty() {
+		return N == 0;
 	}
 	public T[] getArray() {
-		int L = 0;
-		for(int x = 0; x < v.length; x++) {
-			if(v[x] != null) L++;
-			else break;
+		T[] copy = (T[]) new Object[N];
+		for(int x = 0; x < N; x++) {
+			if(v[x] != null) copy[x] = v[x];
 		}
-		T[] copy = (T[]) new Object[L];
-		for(int x = 0; x < L; x++) copy[x] = v[x];
 		return copy;
 	}
 }
@@ -60,12 +47,12 @@ class Queue<T> {
 	private int tail = 0;
 	public Queue() {}
 	private void resize(int L) {
-                T[] copy = (T[]) new Object[L];
+        T[] copy = (T[]) new Object[L];
 		for(int x = head; x < tail; x++) copy[x - head] = q[x];
 		q = copy;
 		tail = tail - head;
 		head = 0;
-        }
+    }
 	public void enqueue(T w) {
 		if(tail == q.length) resize(q.length * 2);
 		q[tail++] = w;
@@ -75,18 +62,18 @@ class Queue<T> {
 		if(tail - head <= q.length / 4) resize(q.length / 2);
 		return item;
 	}
-	public boolean isEmpty() { 
-		return q[head] == null; 
+	public boolean isEmpty() {
+		return q[head] == null;
+	}
+	public void decreasePriority() {
+		T item = dequeue();
+		enqueue(item);
 	}
 	public T[] getArray() {
-		int L = 0;
-                for(int x = 0; x < q.length; x++) {
-                        if(q[x] != null) L++;
-                        else break;
-                }
-                T[] copy = (T[]) new Object[L];
-                for(int x = 0; x < L; x++) copy[x] = q[x];
-                return copy;
+        T[] copy = (T[]) new Object[tail-head+1];
+        for(int x = head; x < tail; x++) {
+			if(q[x] != null) copy[x] = q[x];
+		}
+        return copy;
 	}
 }
-
