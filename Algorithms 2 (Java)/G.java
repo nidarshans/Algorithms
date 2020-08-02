@@ -1,29 +1,7 @@
 import java.lang.Math;
 
-public class graph {
-	public static void main(String[] args) {
-		UndirectedGraph M = new UndirectedGraph(6);
-		M.addEdge(0,2);
-		M.addEdge(0,5);
-		M.addEdge(0,1);
-		M.addEdge(1,2);
-		M.addEdge(3,5);
-		M.addEdge(3,2);
-		M.addEdge(3,4);
-		M.addEdge(2,4);
-		M.bfs(0);
-		for(int i : M.edgeTo) System.out.print(i + " ");
-		/*
-		for(Stack<Integer> s : M.A) {
-			Object[] o = s.getArray();
-			for(Object y : o) {
-				Integer i = (Integer) y;
-				System.out.print(i.intValue() + " ");
-			}
-			System.out.println();
-		}
-		*/
-	}
+public class G {
+	public static void main(String[] args) {}
 }
 
 class Graph {
@@ -38,7 +16,7 @@ class Graph {
 
 	public Graph(int V) {
 		this.V = V;
-		A = (Stack<Integer>[]) new Stack[V]; 
+		A = (Stack<Integer>[]) new Stack[V];
 		marked = new boolean[V];
 		edgeTo = new int[V];
 		distTo = new int[V];
@@ -50,7 +28,7 @@ class Graph {
 			A[x] = new Stack<Integer>();
 		}
 	}
-	
+
 	public void dfs(int v) {
 		Stack<Integer> S = new Stack<Integer>();
 		S.push(Integer.valueOf(v));
@@ -70,7 +48,7 @@ class Graph {
 			}
 		}
 	}
-	
+
 	public void bfs(int v) {
 		Queue<Integer> Q = new Queue<Integer>();
 		Q.enqueue(Integer.valueOf(v));
@@ -114,18 +92,53 @@ class DirectedGraph extends Graph {
 }
 
 class EdgeWeightedGraph {
-	private final int V;
-	public Stack<Edge>[] G;
+	public final int V;
+	public Stack<Edge>[] EG;
+	public int[] edgeTo;
+	public double[] distTo;
+	public boolean[] visited;
 
 	public EdgeWeightedGraph(int V) {
 		this.V = V;
-		G = (Stack<Edge>[]) new Stack[V];
-		for(int x = 0; x < V; x++) G[x] = new Stack<Edge>();
+		EG = (Stack<Edge>[]) new Stack[V];
+		for(int x = 0; x < V; x++) EG[x] = new Stack<Edge>();
 	}
-	public void addEdge(int v, int w, int weight) {
+	public void addUndirectedEdge(int v, int w, int weight) {
 		Edge E = new Edge(v,w,weight);
-		G[v].push(E);
-		G[w].push(E);
+		EG[v].push(E);
+		EG[w].push(E);
+	}
+	public void addDirectedEdge(int v, int w, int weight) {
+		Edge E = new Edge(v,w,weight);
+		EG[v].push(E);
+	}
+	public void dij(int source) {
+		edgeTo = new int[V];
+		distTo = new double[V];
+		visited = new boolean[V];
+		BinaryHeap B = new BinaryHeap(V);
+		for(int x = 0; x < V; x++) {
+			distTo[x] = 9999;
+			visited[x] = false;
+		}
+		distTo[source] = 0;
+		B.insert(source);
+		while(!B.isEmpty()) {
+			int v = B.deleteMin();
+			visited[v] = true;
+			Object[] i = EG[v].getArray();
+			Edge e;
+			for(Object o : i) {
+				e = (Edge) o;
+				int a = e.from(), b = e.to();
+				if(distTo[b] > distTo[a] + e.getWeight()) {
+					distTo[b] = distTo[a] + e.getWeight();
+					edgeTo[b] = a;
+					if(!visited[b]) B.insert(b);
+					else B.decreasePriority(b);
+				}
+			}
+		}
 	}
 }
 
@@ -138,8 +151,8 @@ class Edge {
 		b = w;
 		weight = e;
 	}
-	public int v1() { return a; }
-	public int v2() { return b; }
+	public int from() { return a; }
+	public int to() { return b; }
 	public double getWeight() { return weight; }
 	public int compare(Edge e) {
 		if(weight < e.getWeight()) return -1;

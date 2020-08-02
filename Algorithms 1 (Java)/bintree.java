@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class binarytree {
+public class bintree {
 	public static void main(String[] args) {}
 }
 
@@ -44,7 +44,7 @@ class BinaryTree {
 	}
 
 	//Functions below are for Red-Black BST
-	
+
 	private Node rotateLeft(Node h) {
 		Node x = h.right;
 		h.right = x.left;
@@ -77,4 +77,3 @@ class Node {
 		left = right = null;
 	}
 }
-
