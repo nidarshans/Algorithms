@@ -1,7 +1,17 @@
 import java.lang.Math;
 
 public class binheap {
-	public static void main(String[] args) {}
+	public static void main(String[] args) {
+		BinaryHeap B = new BinaryHeap(10);
+		for(int x = 0; x < 9; x++) B.insert((int)(Math.random() * 100));
+		B.insert(5);
+		for(int x : B.getArray()) System.out.print(x + " ");
+		System.out.println();
+		B.decreasePriority(5);
+		for(int x : B.getArray()) System.out.print(x + " ");
+		System.out.println();
+		B.flush();
+	}
 }
 
 class BinaryHeap { //Currently MinBinaryHeap
@@ -9,7 +19,9 @@ class BinaryHeap { //Currently MinBinaryHeap
 	private int N = 0;
 	public BinaryHeap(int N) {
 		a = new int[N+1];
+		a[0] = 0;
 	}
+	// < ----- ESSENTIAL FUNCTIONS ----- >
 	public void sort() {
 		int L = a.length - 1;
 		while(L > 1) {
@@ -40,10 +52,6 @@ class BinaryHeap { //Currently MinBinaryHeap
 			k = j;
 		}
 	}
-	public void decreasePriority(int index) {
-		swap(index, a[N]);
-		sink(index, --N);
-	}
 	public int deleteMin() {
 		int min = a[1];
 		swap(1,N--);
@@ -51,7 +59,26 @@ class BinaryHeap { //Currently MinBinaryHeap
 		a[N+1] = 99999;
 		return min;
 	}
-	public boolean isEmpty() { return N == 0; }
+	// < ----- UTILITY FUNCTIONS ----- >
+	public void decreasePriority(int element) {
+		int i = 0;
+		int deviation = ((a[1] + a[N]) / 2) - element;
+		if(deviation >= 0) {
+			for(int x = 1; x <= N; x++) {
+				if(a[x] == element) i = x;
+			}
+		}
+		if(deviation < 0) {
+			for(int x = N; x >= 1; x--) {
+				if(a[x] == element) i = x;
+			}
+		}
+		swap(i, N);
+		sink(i, --N);
+	}
+	public boolean isEmpty() {
+		return N == 0;
+	}
 	public void flush() {
 		while(N > 0) System.out.print(deleteMin() + " ");
 		System.out.println();
@@ -60,5 +87,8 @@ class BinaryHeap { //Currently MinBinaryHeap
 		int[] copy = new int[N];
 		for(int x = 1; x <= N; x++) copy[x-1] = a[x];
 		return copy;
+	}
+	public int[] getArray2() {
+		return a;
 	}
 }
