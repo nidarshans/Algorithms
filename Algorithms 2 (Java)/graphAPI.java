@@ -1,6 +1,6 @@
 import java.lang.Math;
 
-public class G {
+public class graphAPI {
 	public static void main(String[] args) {}
 }
 
@@ -43,7 +43,7 @@ class Graph {
 					S.push(u);
 					marked[u.intValue()] = true;
 					edgeTo[u.intValue()] = a;
-					// cc[u.intValue()] = count; CC for UndirectedGraph
+					cc[u.intValue()] = count;
 				}
 			}
 		}
@@ -116,11 +116,23 @@ class EdgeWeightedGraph {
 		edgeTo = new int[V];
 		distTo = new double[V];
 		visited = new boolean[V];
-		BinaryHeap B = new BinaryHeap(V);
-		for(int x = 0; x < V; x++) {
-			distTo[x] = 9999;
+		int heap_size = 0;
+		double percent = 100;
+		for(int x = 0, size = 0; x < V; x++) {
+			size = EG[x].getSize();
+			if(size > 1) heap_size = Math.max(heap_size, size);
+			flowTo[x] = 99999;
 			visited[x] = false;
 		}
+		for(int h = heap_size - 1; h >= 1; h--) heap_size += h;
+		System.out.println("heap_size = " + heap_size);
+		percent = (double)(V - heap_size);
+		percent = percent / (double)(V);
+		percent *= 100;
+		percent = (double)((int)percent);
+		System.out.println("Saved " + percent + "% of space");
+
+		BinaryHeap B = new BinaryHeap(heap_size);
 		distTo[source] = 0;
 		B.insert(source);
 		while(!B.isEmpty()) {
