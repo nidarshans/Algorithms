@@ -39,6 +39,10 @@ class Stack<T> {
 		}
 		return copy;
 	}
+	public T[] getArray2() {
+		return v;
+	}
+	public int getSize() { return N; }
 }
 
 class Queue<T> {
@@ -75,5 +79,12 @@ class Queue<T> {
 			if(q[x] != null) copy[x] = q[x];
 		}
         return copy;
+	}
+	public T[] getArray2() {
+		return q;
+	}
+	public int getSize() {
+		if(q[head] == null) return 0;
+		else return tail-head+1;
 	}
 }
