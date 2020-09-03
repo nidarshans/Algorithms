@@ -99,7 +99,7 @@ class FlowNetwork {
 		}
 
 		if(heap_size == 0) heap_size = 1;
-		for(int h = heap_size - 1; h >= 1; h--) heap_size += h;
+		heap_size = V;
 		System.out.println("\nheap_size = " + heap_size);
 		percent = (double)(V - heap_size);
 		percent = percent / (double)(V);
@@ -120,9 +120,9 @@ class FlowNetwork {
 				double current, next;
 				current = flowTo[b];
 				if(current != 0) current = (double)(flowTo[b]) / (double)(cost[b]);
-				current *= 100000;
+				current *= 1000000;
 				next = getRatio(flowTo, cost, p);
-				next *= 100000;
+				next *= 1000000;
 				if(next > current) {
 					cost[b] = p.getCost() + cost[a];
 					flowTo[b] = Math.min(p.getFlow(), flowTo[a]);
