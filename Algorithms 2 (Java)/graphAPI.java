@@ -121,9 +121,10 @@ class EdgeWeightedGraph {
 		for(int x = 0, size = 0; x < V; x++) {
 			size = EG[x].getSize();
 			if(size > 1) heap_size = Math.max(heap_size, size);
-			flowTo[x] = 99999;
+			distTo[x] = 0;
 			visited[x] = false;
 		}
+		
 		for(int h = heap_size - 1; h >= 1; h--) heap_size += h;
 		System.out.println("heap_size = " + heap_size);
 		percent = (double)(V - heap_size);
