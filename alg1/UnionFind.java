@@ -1,13 +1,8 @@
-import java.io.File;
+package alg1;
 import java.lang.Math;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class unionfind {
-	public static void main(String[] args) {
-		
-	}
+public class UnionFind {
+	public static void main(String[] args) {}
 }
 
 abstract class UF {
@@ -21,7 +16,7 @@ class QuickFind extends UF {
 		id = new int[N];
 		for(int x = 0; x < N; x++) {
 			id[x] = x;
-		}	
+		}
 	}
 	public boolean connected(int p, int q) {
 		return id[p] == id[q];
@@ -48,7 +43,7 @@ class QuickUnion extends UF {
 	}
 	private int root(int i) {
 		while(i != id[i]) {
-			/* Path compression: 
+			/* Path compression:
 			 * id[i] = id[id[i]]; */
 			i = id[i];
 		}
@@ -74,4 +69,3 @@ class QuickUnion extends UF {
 		}
 	}
 }
-

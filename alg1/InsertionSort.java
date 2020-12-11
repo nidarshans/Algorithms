@@ -1,10 +1,7 @@
-import java.io.File;
+package alg1;
 import java.lang.Math;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class insertionsort {
+public class InsertionSort {
 	public static void main(String[] args) {
 		int[] array = new int[args.length];
                 for(int z = 0; z < args.length; z++) {
@@ -38,7 +35,7 @@ public class insertionsort {
 		while(h >= 1) {
 			for(int a = h; a < N; a++) {
 				/* Starts off at a = h otherwise subsequent b -= h decrements
-				 * will give a negative index value */ 
+				 * will give a negative index value */
 				key = arg[a];
 				//b >= h because the b -= h will give a negative index for array
 				for(b = a; b >= h && key < arg[b - h]; b -= h) {

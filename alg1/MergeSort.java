@@ -1,17 +1,14 @@
-import java.io.File;
+package alg1;
 import java.lang.Math;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class mergesort {
+public class MergeSort {
 	public static void main(String[] args) {
 		int[] a = new int[5000];
 		int[] b = new int[a.length];
 		for(int x = 0; x < a.length; x++) a[x] = (int)(Math.random() * 10000);
 		sort(a,b,0,13);
 		for(int x = 0; x < 10; x++) {
-			System.out.println(a[x] + " ");			
+			System.out.println(a[x] + " ");
 		}
 	}
 

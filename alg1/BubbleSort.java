@@ -1,18 +1,14 @@
-
-import java.io.File;
+package alg1;
 import java.lang.Math;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class bubblesort {
+public class BubbleSort {
 	public static void main(String[] args) {
 		int[] array = new int[args.length];
 		for(int z = 0; z < args.length; z++) {
 			array[z] = Integer.parseInt(args[z]);
 		}
-		while(true) { 
-			if(bubble(array) == false) break;
+		while(true) {
+			if(bubbleSort(array) == false) break;
 		}
 		for(int x : array) System.out.println(x);
 	}

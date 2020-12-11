@@ -1,11 +1,7 @@
-import java.io.File;
+package alg1;
 import java.lang.Math;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class quicksort {
-	public quicksort() {}
+public class QuickSort {
 	public static void main(String[] args) {}
 
 	public static double partition(double[] arg, double l,  double h) {

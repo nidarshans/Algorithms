@@ -1,6 +1,10 @@
+package alg2;
 import java.lang.Math;
+import alg1.Stack;
+import alg1.Queue;
+import alg1.BinaryHeap;
 
-public class graphAPI {
+public class Graphs {
 	public static void main(String[] args) {}
 }
 
@@ -124,7 +128,7 @@ class EdgeWeightedGraph {
 			distTo[x] = 0;
 			visited[x] = false;
 		}
-		
+
 		for(int h = heap_size - 1; h >= 1; h--) heap_size += h;
 		System.out.println("heap_size = " + heap_size);
 		percent = (double)(V - heap_size);

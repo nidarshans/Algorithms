@@ -1,20 +1,7 @@
+package alg1;
 import java.lang.Math;
 
-public class binheap {
-	public static void main(String[] args) {
-		BinaryHeap B = new BinaryHeap(10);
-		for(int x = 0; x < 9; x++) B.insert((int)(Math.random() * 100));
-		B.insert(5);
-		for(int x : B.getArray()) System.out.print(x + " ");
-		System.out.println();
-		B.decreasePriority(5);
-		for(int x : B.getArray()) System.out.print(x + " ");
-		System.out.println();
-		B.flush();
-	}
-}
-
-class BinaryHeap { //Currently MinBinaryHeap
+public class BinaryHeap { //Currently MinBinaryHeap
 	public int[] a;
 	private int N = 0;
 	public BinaryHeap(int N) {
@@ -91,4 +78,5 @@ class BinaryHeap { //Currently MinBinaryHeap
 	public int[] getArray2() {
 		return a;
 	}
+	public static void main(String[] args) {}
 }

@@ -1,9 +1,7 @@
 import java.lang.Math;
-
-public class radixsort {
-	public static void main(String[] args) {
-
-	}
+//Doesn't compile
+public class RadixSort {
+	public static void main(String[] args) {}
     public static void countSort(int[] array, int size, int place) {
         int[] output = new int[size + 1];
         int max = array[0];

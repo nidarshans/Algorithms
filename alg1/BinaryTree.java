@@ -1,14 +1,7 @@
-import java.io.File;
+package alg1;
 import java.lang.Math;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class bintree {
-	public static void main(String[] args) {}
-}
-
-class BinaryTree {
+public class BinaryTree {
 	public Node root;
 	private int N = 0;
 	public BinaryTree(int r) {
