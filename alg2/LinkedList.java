@@ -37,27 +37,35 @@ public class LinkedList<T> {
     }
     public Node<T> remove(int index) {
         if (index > N || index < 0) return null;
+        Node<T> prev = null;
         Node<T> pointer = head;
         Node<T> removed;
-        for (int n = 0; n < index - 1; n++) {
+        for (int n = 0; n < index; n++) {
+            prev = pointer;
             pointer = pointer.next;
         }
-        removed = pointer.next;
-        pointer.next = pointer.next.next;
-        removed.next = null;
-        N--;
-        return removed;
+        if (pointer == head) {
+            head = pointer.next;
+            N--;
+            return pointer;
+        } else {
+            removed = pointer;
+            prev.next = removed.next;
+            N--;
+            return removed;
+        }
     }
     public int getSize() {
         return N;
     }
     public void print() {
         Node<T> pointer = head;
-        for (int n = 0; n < N; n++) {
+        for (int n = 0; pointer != null; n++) {
             System.out.println(pointer.value);
             pointer = pointer.next;
         }
     }
+    public static void main(String[] args) {}
 }
 
 class Node<T> {
