@@ -27,7 +27,7 @@ class Graph {
 		count = 0;
 		//cc = new int[V];
 		//scc = new int[V];
-		for(int x = 0; x < V; x++) {
+		for (int x = 0; x < V; x++) {
 			marked[x] = false;
 			A[x] = new Stack<Integer>();
 		}
@@ -38,12 +38,12 @@ class Graph {
 		S.push(Integer.valueOf(v));
 		count = 0;
 		marked[v] = true;
-		while(!S.isEmpty()) {
+		while (!S.isEmpty()) {
 			int a = S.pop().intValue();
 			Object[] i = A[a].getArray();
-			for(Object o : i) {
+			for (Object o : i) {
 				Integer u = (Integer) o;
-				if(marked[u.intValue()] == false) {
+				if (marked[u.intValue()] == false) {
 					S.push(u);
 					marked[u.intValue()] = true;
 					edgeTo[u.intValue()] = a;
@@ -58,19 +58,19 @@ class Graph {
 		Q.enqueue(Integer.valueOf(v));
 		marked[v] = true;
 		count++;
-		while(!Q.isEmpty()) {
+		while (!Q.isEmpty()) {
 			int a = Q.dequeue().intValue();
 			Object[] i = A[a].getArray();
-			for(Object o : i) {
+			for (Object o : i) {
 				Integer u = (Integer) o;
-				if(marked[u.intValue()] == false) {
+				if (marked[u.intValue()] == false) {
 					Q.enqueue(u);
 					marked[u.intValue()] = true;
 					edgeTo[u.intValue()] = a;
 					distTo[u.intValue()] = count;
 				}
 			}
-			count++; //For shortest path
+			count++; //for  shortest path
 		}
 		count = 0; //Reset count
 	}
@@ -105,7 +105,7 @@ class EdgeWeightedGraph {
 	public EdgeWeightedGraph(int V) {
 		this.V = V;
 		EG = (Stack<Edge>[]) new Stack[V];
-		for(int x = 0; x < V; x++) EG[x] = new Stack<Edge>();
+		for (int x = 0; x < V; x++) EG[x] = new Stack<Edge>();
 	}
 	public void addUndirectedEdge(int v, int w, int weight) {
 		Edge E = new Edge(v,w,weight);
@@ -120,38 +120,28 @@ class EdgeWeightedGraph {
 		edgeTo = new int[V];
 		distTo = new double[V];
 		visited = new boolean[V];
-		int heap_size = 0;
+		int heap_size = V;
 		double percent = 100;
-		for(int x = 0, size = 0; x < V; x++) {
+		for (int x = 0, size = 0; x < V; x++) {
 			size = EG[x].getSize();
-			if(size > 1) heap_size = Math.max(heap_size, size);
 			distTo[x] = 0;
 			visited[x] = false;
 		}
-
-		for(int h = heap_size - 1; h >= 1; h--) heap_size += h;
-		System.out.println("heap_size = " + heap_size);
-		percent = (double)(V - heap_size);
-		percent = percent / (double)(V);
-		percent *= 100;
-		percent = (double)((int)percent);
-		System.out.println("Saved " + percent + "% of space");
-
 		BinaryHeap B = new BinaryHeap(heap_size);
 		distTo[source] = 0;
 		B.insert(source);
-		while(!B.isEmpty()) {
+		while (!B.isEmpty()) {
 			int v = B.deleteMin();
 			visited[v] = true;
 			Object[] i = EG[v].getArray();
 			Edge e;
-			for(Object o : i) {
+			for (Object o : i) {
 				e = (Edge) o;
 				int a = e.from(), b = e.to();
-				if(distTo[b] > distTo[a] + e.getWeight()) {
+				if (distTo[b] > distTo[a] + e.getWeight()) {
 					distTo[b] = distTo[a] + e.getWeight();
 					edgeTo[b] = a;
-					if(!visited[b]) B.insert(b);
+					if (!visited[b]) B.insert(b);
 					else B.decreasePriority(b);
 				}
 			}
@@ -172,8 +162,8 @@ class Edge {
 	public int to() { return b; }
 	public double getWeight() { return weight; }
 	public int compare(Edge e) {
-		if(weight < e.getWeight()) return -1;
-		else if(weight > e.getWeight()) return 1;
+		if (weight < e.getWeight()) return -1;
+		else if (weight > e.getWeight()) return 1;
 		else return 0;
 	}
 }
